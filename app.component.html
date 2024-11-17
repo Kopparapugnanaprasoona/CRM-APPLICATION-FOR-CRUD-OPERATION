@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <h2>{{ selectedUserId ? 'Update User' : 'Create New User' }}</h2>
+
+  <form>
+    <label>First Name: </label>
+    <input [(ngModel)]="first_name" name="first_name" placeholder="First Name" required /><br />
+    
+    <label>Last Name: </label>
+    <input [(ngModel)]="last_name" name="last_name" placeholder="Last Name" required /><br />
+    
+    <label>Email: </label>
+    <input [(ngModel)]="email" name="email" placeholder="Email" type="email" required /><br />
+    
+    <label>Phone Number: </label>
+    <input [(ngModel)]="phone_number" name="phone_number" placeholder="Phone Number" type="tel" required /><br />
+    
+    <label>Company: </label>
+    <input [(ngModel)]="company" name="company" placeholder="Company" required /><br />
+    
+    <label>Job Title: </label>
+    <input [(ngModel)]="job_title" name="job_title" placeholder="Job Title" required /><br />
+    
+    <button type="button" (click)="selectedUserId ? updateUser() : createUser()" [disabled]="!first_name || !last_name || !email || !phone_number || !company || !job_title">
+      {{ selectedUserId ? 'Update' : 'Create' }}
+    </button>
+    <button type="button" (click)="clearFields()">Clear</button>
+  </form>
+
+  <h2>User List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Company</th>
+        <th>Job Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone_number }}</td>
+        <td>{{ user.company }}</td>
+        <td>{{ user.job_title }}</td>
+        <td>
+          <button (click)="selectUserForUpdate(user)">Edit</button>
+          <button (click)="deleteUser(user._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
